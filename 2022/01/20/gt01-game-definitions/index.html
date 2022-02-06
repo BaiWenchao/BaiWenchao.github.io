@@ -19,16 +19,16 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="博弈分析框架 Players: 博弈的参与者是谁？ 人，公司，组织，政府，民族…   Actions: 博弈的参与者可以采取哪些行为？ 拍卖中的定价，是否决定罢工，何时出售股票，如何进行投票… p.s. 参与者能够采取并对参与者的收益产生影响的行为都应该纳入考虑范围。   Timing of the Interactions: 博弈交互的时序？ 参与者的行为是同时发生的还是顺序发生的？ 参与者之间">
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.9.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="博弈分析的基本框架、博弈组成的符号表示以及纯策略博弈的基本概念。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="博弈论01：简介与基本定义">
 <meta property="og:url" content="http://example.com/2022/01/20/gt01-game-definitions/index.html">
 <meta property="og:site_name" content="蔷薇集">
-<meta property="og:description" content="博弈分析框架 Players: 博弈的参与者是谁？ 人，公司，组织，政府，民族…   Actions: 博弈的参与者可以采取哪些行为？ 拍卖中的定价，是否决定罢工，何时出售股票，如何进行投票… p.s. 参与者能够采取并对参与者的收益产生影响的行为都应该纳入考虑范围。   Timing of the Interactions: 博弈交互的时序？ 参与者的行为是同时发生的还是顺序发生的？ 参与者之间">
+<meta property="og:description" content="博弈分析的基本框架、博弈组成的符号表示以及纯策略博弈的基本概念。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-01-20T14:33:07.000Z">
-<meta property="article:modified_time" content="2022-01-21T11:53:31.371Z">
+<meta property="article:modified_time" content="2022-01-28T13:21:23.445Z">
 <meta property="article:author" content="白文超">
 <meta property="article:tag" content="博弈论">
 <meta name="twitter:card" content="summary">
@@ -80,6 +80,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -93,11 +94,37 @@
         <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">1</span></a></li>
         <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">1</span></a></li>
         <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">1</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
         
@@ -123,7 +150,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">博弈分析框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E7%9A%84%E4%B8%80%E8%88%AC%E5%BD%A2%E5%BC%8F%EF%BC%88Normal-Form%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">博弈的一般形式（Normal Form）</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E5%88%86%E6%9E%90%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">博弈分析框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E7%BB%84%E6%88%90%E7%9A%84%E7%AC%A6%E5%8F%B7%E8%A1%A8%E7%A4%BA%EF%BC%88Normal-Form-Games%EF%BC%89"><span class="nav-number">2.</span> <span class="nav-text">博弈组成的符号表示（Normal Form Games）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%9A%E5%BC%88%E7%9A%84%E6%A0%87%E5%87%86%E7%9F%A9%E9%98%B5%E8%A1%A8%E7%A4%BA-%EF%BC%88Normal-Form-Game%EF%BC%89"><span class="nav-number">3.</span> <span class="nav-text">博弈的标准矩阵表示 （Normal Form Game）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%80%E4%BC%98%E5%8F%8D%E5%BA%94%EF%BC%88Best-Response-BR%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">最优反应（Best Response, BR）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%B3%E4%BB%80%E5%9D%87%E8%A1%A1-%EF%BC%88Nash-Equilibrium-NE%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">纳什均衡 （Nash Equilibrium, NE）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%A0%E4%BC%98%E7%AD%96%E7%95%A5%EF%BC%88Dominant-Strategies%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">占优策略（Dominant Strategies）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B8%95%E7%B4%AF%E6%89%98%E6%9C%80%E4%BC%98%EF%BC%88Pareto-Optimal%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">帕累托最优（Pareto Optimal）</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -227,7 +254,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-01-21 19:53:31" itemprop="dateModified" datetime="2022-01-21T19:53:31+08:00">2022-01-21</time>
+      <time title="修改时间：2022-01-28 21:21:23" itemprop="dateModified" datetime="2022-01-28T21:21:23+08:00">2022-01-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -242,6 +269,7 @@
   
 </div>
 
+            <div class="post-description">博弈分析的基本框架、博弈组成的符号表示以及纯策略博弈的基本概念。</div>
         </div>
       </header>
 
@@ -250,43 +278,127 @@
     
     <div class="post-body" itemprop="articleBody">
         <h2 id="博弈分析框架"><a href="#博弈分析框架" class="headerlink" title="博弈分析框架"></a>博弈分析框架</h2><ul>
-<li><strong>Players</strong>: 博弈的参与者是谁？<ul>
+<li><strong>Players</strong>: 博弈的玩家是谁？<ul>
 <li>人，公司，组织，政府，民族…</li>
 </ul>
 </li>
-<li><strong>Actions</strong>: 博弈的参与者可以采取哪些行为？<ul>
+<li><strong>Actions</strong>: 博弈的玩家可以采取哪些行为？<ul>
 <li>拍卖中的定价，是否决定罢工，何时出售股票，如何进行投票…</li>
-<li>p.s. 参与者能够采取并对参与者的收益产生影响的行为都应该纳入考虑范围。</li>
+<li>p.s. 玩家能够采取并对玩家的效益产生影响的行为都应该纳入考虑范围。</li>
 </ul>
 </li>
 <li><strong>Timing of the Interactions</strong>: 博弈交互的时序？<ul>
-<li>参与者的行为是同时发生的还是顺序发生的？</li>
-<li>参与者之间的交互持续发生吗？</li>
+<li>玩家的行为是同时发生的还是顺序发生的？</li>
+<li>玩家之间的交互持续发生吗？</li>
 <li>行为发生的顺序是什么？</li>
-<li>行为发生的顺序对参与者的收益有何影响？</li>
-<li>参与者采取行为时可以获得什么信息吗？</li>
+<li>行为发生的顺序对玩家的效益有何影响？</li>
+<li>玩家采取行为时可以获得什么信息吗？</li>
 </ul>
 </li>
-<li><strong>Payoffs</strong>: 博弈交互过程中的收益？<ul>
-<li>收益的分析需要仔细研究参与者所有可能的行为。</li>
-<li>某些参与者（例如：自己）可能比其他参与者更加方便进行收益评估。</li>
-<li>分析参与者的行为决策策略是一个可能的难点。</li>
+<li><strong>Payoffs</strong>: 博弈交互过程中的效益？<ul>
+<li>效益的分析需要仔细研究玩家所有可能的行为。</li>
+<li>某些玩家（例如：自己）可能比其他玩家更加方便进行效益评估。</li>
+<li>分析玩家的行为决策策略是一个可能的难点。</li>
 </ul>
 </li>
 </ul>
-<h2 id="博弈的一般形式（Normal-Form）"><a href="#博弈的一般形式（Normal-Form）" class="headerlink" title="博弈的一般形式（Normal Form）"></a>博弈的一般形式（Normal Form）</h2><ul>
-<li>Players (finite): $N = \{1,\cdots,n\}$</li>
-<li>Actions:<ul>
+<h2 id="博弈组成的符号表示（Normal-Form-Games）"><a href="#博弈组成的符号表示（Normal-Form-Games）" class="headerlink" title="博弈组成的符号表示（Normal Form Games）"></a>博弈组成的符号表示（Normal Form Games）</h2><ul>
+<li><p><strong>Players</strong> (finite)：玩家</p>
+<ul>
+<li>$N = \{1,\cdots,n\}$</li>
+</ul>
+</li>
+<li><p><strong>Actions</strong> (finite)：行为</p>
+<ul>
 <li>action set (finite) for player $i$：$A_i$</li>
 <li>set of action profiles of pure strategies or actions: $A = A_1\times\cdots\times A_n$</li>
 <li>a generic action profile: $a=(a_1,\cdots,a_n)\in A$</li>
 </ul>
 </li>
-<li>Utility (or Payoff) function<ul>
+<li><strong>Utility (or Payoff) function</strong>：效益函数<ul>
 <li>utility function for player $i$: $u_i:A\rightarrow \mathbb{R}$</li>
 <li>profile of utility functions: $u=(u_1,\cdots,u_n)$</li>
 </ul>
 </li>
+</ul>
+<h2 id="博弈的标准矩阵表示-（Normal-Form-Game）"><a href="#博弈的标准矩阵表示-（Normal-Form-Game）" class="headerlink" title="博弈的标准矩阵表示 （Normal Form Game）"></a>博弈的标准矩阵表示 （Normal Form Game）</h2><ul>
+<li><p>以2玩家对应的BiMatrix为例：</p>
+<ul>
+<li>玩家$1$对应“行”，玩家$2$对应“列”</li>
+<li>“行”对应$a_1\in A_1$，“列”对应$a_2\in A_2$</li>
+<li>矩阵中的每一个单元都对应着玩家在当前行为下的效益：“行”玩家在前，“列”玩家在后</li>
+</ul>
+</li>
+<li><p>囚徒困境（Prisoner’s dilemma）对应的BiMatrix：</p>
+<ul>
+<li><strong>Players</strong>: $N=\{1, 2\}$</li>
+<li><strong>Actions</strong>: $A_i = \{C, D\}$ (<strong>C</strong> for Cooperate 合作；<strong>D</strong> for defect 背叛)</li>
+<li><strong>Payoff</strong>: 以$a_1=D$, $a_2=C$为例，玩家$1$的收益为0，玩家$2$的收益为-3</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">P1\P2</th>
+<th style="text-align:center">C</th>
+<th style="text-align:center">D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>C</strong></td>
+<td style="text-align:center">-1, -1</td>
+<td style="text-align:center">-3, 0</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>D</strong></td>
+<td style="text-align:center">0, -3</td>
+<td style="text-align:center">-2, -2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="最优反应（Best-Response-BR）"><a href="#最优反应（Best-Response-BR）" class="headerlink" title="最优反应（Best Response, BR）"></a>最优反应（Best Response, BR）</h2><ul>
+<li>给定其他玩家采取的行为，玩家$i$能采取的效益最高的行为即<strong>BR</strong></li>
+</ul>
+<h2 id="纳什均衡-（Nash-Equilibrium-NE）"><a href="#纳什均衡-（Nash-Equilibrium-NE）" class="headerlink" title="纳什均衡 （Nash Equilibrium, NE）"></a>纳什均衡 （Nash Equilibrium, NE）</h2><ul>
+<li>稳定的action profile即是纳什均衡：该action profile中任意一个行为都是相对于其他行为的<strong>BR</strong></li>
+</ul>
+<h2 id="占优策略（Dominant-Strategies）"><a href="#占优策略（Dominant-Strategies）" class="headerlink" title="占优策略（Dominant Strategies）"></a>占优策略（Dominant Strategies）</h2><ul>
+<li>考虑其他玩家所有可能的策略组合（$S_{-i}$），玩家$i$能够采取的效益最高的策略（$s_i$）即<strong>Dominant Strategy</strong><ul>
+<li>在纯策略（pure strategy）博弈中，“策略”（Strategy）可以简单理解为“行为”（Action）</li>
+<li>占优策略与最优反应的区别在于，占优策略需要考虑其他玩家所有可能的行为集合而最优反应只需要考虑给定的一组其他玩家的行为</li>
+</ul>
+</li>
+<li>考虑$s_i$和$s_{i}^{‘}$是玩家$i$的两种不同的策略，$S_{-i}$是其他玩家的所有策略集合：<ul>
+<li>定义<strong>dominate</strong><ul>
+<li>$s_i$ <strong>strictly dominates</strong> $s_{i}^{‘}$ if $\forall s_{-i}\in S_{-i}$, $u_i(s_i,s_{-i})&gt;u_i(s_i^{‘},s_{-i})$</li>
+<li>$s_i$ <strong>very weakly dominates</strong> $s_{i}^{‘}$ if $\forall s_{-i}\in S_{-i}$, $u_i(s_i,s_{-i})\ge u_i(s_i^{‘},s_{-i})$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果某个策略相对于该玩家的其他策略都是占优的，我们称之为<strong>dominant</strong></li>
+<li>如果某个strategy profile中所有的策略都是dominant strategy，那么这个strategy profile必是纳什均衡<ul>
+<li>strictly dominant strategies组成的均衡必是唯一的</li>
+</ul>
+</li>
+</ul>
+<h2 id="帕累托最优（Pareto-Optimal）"><a href="#帕累托最优（Pareto-Optimal）" class="headerlink" title="帕累托最优（Pareto Optimal）"></a>帕累托最优（Pareto Optimal）</h2><ul>
+<li>帕累托最优是以局外人的视角评估博弈的一种手段</li>
+<li>帕累托占优：<ul>
+<li>当某一种博弈结果$o$对于所有玩家都不差于$o’$ （即$u_1(a)\ge u_1(a’),\cdots, u_n(a)\ge u_n(a’)$），我们称$o$ Pareto-dominates $o’$</li>
+</ul>
+</li>
+<li>帕累托最优：<ul>
+<li>如果没有任何一种其他的博弈结果能够对博弈结果$o^<em>$形成帕累托占优，我们称$o^</em>$为帕累托最优</li>
+<li>一场博弈中可能存在多个帕累托最优</li>
+<li>一场博弈中至少存在一个帕累托最优</li>
+</ul>
+</li>
+<li>例如，在3中描绘的囚徒困境中，(C, C), (C, D), (D, C) 都是帕累托最优 （(C, C) Parato-dominants (D, D) 因此 (D, D)不是帕累托最优）</li>
 </ul>
 
     </div>
@@ -338,6 +450,8 @@
 <script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
 
   
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
 
 
 

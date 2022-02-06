@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>博弈论01：简介与基本定义</title>
+    <url>/2022/01/20/gt01-game-definitions/</url>
+    <content><![CDATA[<h2 id="博弈分析框架"><a href="#博弈分析框架" class="headerlink" title="博弈分析框架"></a>博弈分析框架</h2><ul>
+<li><strong>Players</strong>: 博弈的玩家是谁？<ul>
+<li>人，公司，组织，政府，民族…</li>
+</ul>
+</li>
+<li><strong>Actions</strong>: 博弈的玩家可以采取哪些行为？<ul>
+<li>拍卖中的定价，是否决定罢工，何时出售股票，如何进行投票…</li>
+<li>p.s. 玩家能够采取并对玩家的效益产生影响的行为都应该纳入考虑范围。</li>
+</ul>
+</li>
+<li><strong>Timing of the Interactions</strong>: 博弈交互的时序？<ul>
+<li>玩家的行为是同时发生的还是顺序发生的？</li>
+<li>玩家之间的交互持续发生吗？</li>
+<li>行为发生的顺序是什么？</li>
+<li>行为发生的顺序对玩家的效益有何影响？</li>
+<li>玩家采取行为时可以获得什么信息吗？</li>
+</ul>
+</li>
+<li><strong>Payoffs</strong>: 博弈交互过程中的效益？<ul>
+<li>效益的分析需要仔细研究玩家所有可能的行为。</li>
+<li>某些玩家（例如：自己）可能比其他玩家更加方便进行效益评估。</li>
+<li>分析玩家的行为决策策略是一个可能的难点。</li>
+</ul>
+</li>
+</ul>
+<h2 id="博弈组成的符号表示（Normal-Form-Games）"><a href="#博弈组成的符号表示（Normal-Form-Games）" class="headerlink" title="博弈组成的符号表示（Normal Form Games）"></a>博弈组成的符号表示（Normal Form Games）</h2><ul>
+<li><p><strong>Players</strong> (finite)：玩家</p>
+<ul>
+<li>$N = \{1,\cdots,n\}$</li>
+</ul>
+</li>
+<li><p><strong>Actions</strong> (finite)：行为</p>
+<ul>
+<li>action set (finite) for player $i$：$A_i$</li>
+<li>set of action profiles of pure strategies or actions: $A = A_1\times\cdots\times A_n$</li>
+<li>a generic action profile: $a=(a_1,\cdots,a_n)\in A$</li>
+</ul>
+</li>
+<li><strong>Utility (or Payoff) function</strong>：效益函数<ul>
+<li>utility function for player $i$: $u_i:A\rightarrow \mathbb{R}$</li>
+<li>profile of utility functions: $u=(u_1,\cdots,u_n)$</li>
+</ul>
+</li>
+</ul>
+<h2 id="博弈的标准矩阵表示-（Normal-Form-Game）"><a href="#博弈的标准矩阵表示-（Normal-Form-Game）" class="headerlink" title="博弈的标准矩阵表示 （Normal Form Game）"></a>博弈的标准矩阵表示 （Normal Form Game）</h2><ul>
+<li><p>以2玩家对应的BiMatrix为例：</p>
+<ul>
+<li>玩家$1$对应“行”，玩家$2$对应“列”</li>
+<li>“行”对应$a_1\in A_1$，“列”对应$a_2\in A_2$</li>
+<li>矩阵中的每一个单元都对应着玩家在当前行为下的效益：“行”玩家在前，“列”玩家在后</li>
+</ul>
+</li>
+<li><p>囚徒困境（Prisoner’s dilemma）对应的BiMatrix：</p>
+<ul>
+<li><strong>Players</strong>: $N=\{1, 2\}$</li>
+<li><strong>Actions</strong>: $A_i = \{C, D\}$ (<strong>C</strong> for Cooperate 合作；<strong>D</strong> for defect 背叛)</li>
+<li><strong>Payoff</strong>: 以$a_1=D$, $a_2=C$为例，玩家$1$的收益为0，玩家$2$的收益为-3</li>
+</ul>
+</li>
+</ul>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">P1\P2</th>
+<th style="text-align:center">C</th>
+<th style="text-align:center">D</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><strong>C</strong></td>
+<td style="text-align:center">-1, -1</td>
+<td style="text-align:center">-3, 0</td>
+</tr>
+<tr>
+<td style="text-align:center"><strong>D</strong></td>
+<td style="text-align:center">0, -3</td>
+<td style="text-align:center">-2, -2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="最优反应（Best-Response-BR）"><a href="#最优反应（Best-Response-BR）" class="headerlink" title="最优反应（Best Response, BR）"></a>最优反应（Best Response, BR）</h2><ul>
+<li>给定其他玩家采取的行为，玩家$i$能采取的效益最高的行为即<strong>BR</strong></li>
+</ul>
+<h2 id="纳什均衡-（Nash-Equilibrium-NE）"><a href="#纳什均衡-（Nash-Equilibrium-NE）" class="headerlink" title="纳什均衡 （Nash Equilibrium, NE）"></a>纳什均衡 （Nash Equilibrium, NE）</h2><ul>
+<li>稳定的action profile即是纳什均衡：该action profile中任意一个行为都是相对于其他行为的<strong>BR</strong></li>
+</ul>
+<h2 id="占优策略（Dominant-Strategies）"><a href="#占优策略（Dominant-Strategies）" class="headerlink" title="占优策略（Dominant Strategies）"></a>占优策略（Dominant Strategies）</h2><ul>
+<li>考虑其他玩家所有可能的策略组合（$S_{-i}$），玩家$i$能够采取的效益最高的策略（$s_i$）即<strong>Dominant Strategy</strong><ul>
+<li>在纯策略（pure strategy）博弈中，“策略”（Strategy）可以简单理解为“行为”（Action）</li>
+<li>占优策略与最优反应的区别在于，占优策略需要考虑其他玩家所有可能的行为集合而最优反应只需要考虑给定的一组其他玩家的行为</li>
+</ul>
+</li>
+<li>考虑$s_i$和$s_{i}^{‘}$是玩家$i$的两种不同的策略，$S_{-i}$是其他玩家的所有策略集合：<ul>
+<li>定义<strong>dominate</strong><ul>
+<li>$s_i$ <strong>strictly dominates</strong> $s_{i}^{‘}$ if $\forall s_{-i}\in S_{-i}$, $u_i(s_i,s_{-i})&gt;u_i(s_i^{‘},s_{-i})$</li>
+<li>$s_i$ <strong>very weakly dominates</strong> $s_{i}^{‘}$ if $\forall s_{-i}\in S_{-i}$, $u_i(s_i,s_{-i})\ge u_i(s_i^{‘},s_{-i})$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果某个策略相对于该玩家的其他策略都是占优的，我们称之为<strong>dominant</strong></li>
+<li>如果某个strategy profile中所有的策略都是dominant strategy，那么这个strategy profile必是纳什均衡<ul>
+<li>strictly dominant strategies组成的均衡必是唯一的</li>
+</ul>
+</li>
+</ul>
+<h2 id="帕累托最优（Pareto-Optimal）"><a href="#帕累托最优（Pareto-Optimal）" class="headerlink" title="帕累托最优（Pareto Optimal）"></a>帕累托最优（Pareto Optimal）</h2><ul>
+<li>帕累托最优是以局外人的视角评估博弈的一种手段</li>
+<li>帕累托占优：<ul>
+<li>当某一种博弈结果$o$对于所有玩家都不差于$o’$ （即$u_1(a)\ge u_1(a’),\cdots, u_n(a)\ge u_n(a’)$），我们称$o$ Pareto-dominates $o’$</li>
+</ul>
+</li>
+<li>帕累托最优：<ul>
+<li>如果没有任何一种其他的博弈结果能够对博弈结果$o^<em>$形成帕累托占优，我们称$o^</em>$为帕累托最优</li>
+<li>一场博弈中可能存在多个帕累托最优</li>
+<li>一场博弈中至少存在一个帕累托最优</li>
+</ul>
+</li>
+<li>例如，在3中描绘的囚徒困境中，(C, C), (C, D), (D, C) 都是帕累托最优 （(C, C) Parato-dominants (D, D) 因此 (D, D)不是帕累托最优）</li>
+</ul>
+]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>博弈论</tag>
+      </tags>
+  </entry>
+</search>
